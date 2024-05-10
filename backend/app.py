@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, render_template
 from dotenv import load_dotenv
 from pymongo import MongoClient, errors
 import os
@@ -24,11 +24,20 @@ collection = db["urlsTesting"]
 app = Flask(__name__)
 
 @app.route("/")
-def greeting():
-  return "Hola mamada"
+def home():
+  return render_template("index.html")
 
-# @app.route("/short", methods=["POST"])
-# def short_url:
+@app.route("/short", methods=["POST"])
+def short_url():
+  new_short_url = {}
 
-# @app.route("/:urlID", methods=["GET"])
-# def redirect:
+  req_data = request.form["long-url"]
+
+  print(req_data)
+  return {"message": "All OK"}, 200
+
+# @app.route("/<urlID>", methods=["GET"])
+# def redirect(urlID):
+
+if __name__ == "__main__":
+  app.run(port=3000)
